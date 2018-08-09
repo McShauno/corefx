@@ -9,7 +9,7 @@ using System.Text;
 namespace System.Security.Cryptography.Asn1
 {
     // ITU-T-REC.X.680-201508 sec 4.
-    internal enum AsnEncodingRules
+    public enum AsnEncodingRules
     {
         BER,
         CER,
@@ -18,7 +18,7 @@ namespace System.Security.Cryptography.Asn1
 
     // Uses a masked overlay of the tag class encoding.
     // T-REC-X.690-201508 sec 8.1.2.2
-    internal enum TagClass : byte
+    public enum TagClass : byte
     {
         Universal = 0,
         Application = 0b0100_0000,
@@ -27,7 +27,7 @@ namespace System.Security.Cryptography.Asn1
     }
 
     // ITU-T-REC.X.680-201508 sec 8.6
-    internal enum UniversalTagNumber
+    public enum UniversalTagNumber
     {
         EndOfContents = 0,
         Boolean = 1,
@@ -75,27 +75,27 @@ namespace System.Security.Cryptography.Asn1
 
     // Represents a BER-family encoded tag.
     // T-REC-X.690-201508 sec 8.1.2
-    internal struct Asn1Tag : IEquatable<Asn1Tag>
+    public struct Asn1Tag : IEquatable<Asn1Tag>
     {
         private const byte ClassMask = 0b1100_0000;
         private const byte ConstructedMask = 0b0010_0000;
         private const byte ControlMask = ClassMask | ConstructedMask;
         private const byte TagNumberMask = 0b0001_1111;
 
-        internal static readonly Asn1Tag EndOfContents = new Asn1Tag(0, (int)UniversalTagNumber.EndOfContents);
-        internal static readonly Asn1Tag Boolean = new Asn1Tag(0, (int)UniversalTagNumber.Boolean);
-        internal static readonly Asn1Tag Integer = new Asn1Tag(0, (int)UniversalTagNumber.Integer);
-        internal static readonly Asn1Tag PrimitiveBitString = new Asn1Tag(0, (int)UniversalTagNumber.BitString);
-        internal static readonly Asn1Tag ConstructedBitString = new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.BitString);
-        internal static readonly Asn1Tag PrimitiveOctetString = new Asn1Tag(0, (int)UniversalTagNumber.OctetString);
-        internal static readonly Asn1Tag ConstructedOctetString = new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.OctetString);
-        internal static readonly Asn1Tag Null = new Asn1Tag(0, (int)UniversalTagNumber.Null);
-        internal static readonly Asn1Tag ObjectIdentifier = new Asn1Tag(0, (int)UniversalTagNumber.ObjectIdentifier);
-        internal static readonly Asn1Tag Enumerated = new Asn1Tag(0, (int)UniversalTagNumber.Enumerated);
-        internal static readonly Asn1Tag Sequence = new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.Sequence);
-        internal static readonly Asn1Tag SetOf = new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.SetOf);
-        internal static readonly Asn1Tag UtcTime = new Asn1Tag(0, (int)UniversalTagNumber.UtcTime);
-        internal static readonly Asn1Tag GeneralizedTime = new Asn1Tag(0, (int)UniversalTagNumber.GeneralizedTime);
+        public static readonly Asn1Tag EndOfContents = new Asn1Tag(0, (int)UniversalTagNumber.EndOfContents);
+        public static readonly Asn1Tag Boolean = new Asn1Tag(0, (int)UniversalTagNumber.Boolean);
+        public static readonly Asn1Tag Integer = new Asn1Tag(0, (int)UniversalTagNumber.Integer);
+        public static readonly Asn1Tag PrimitiveBitString = new Asn1Tag(0, (int)UniversalTagNumber.BitString);
+        public static readonly Asn1Tag ConstructedBitString = new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.BitString);
+        public static readonly Asn1Tag PrimitiveOctetString = new Asn1Tag(0, (int)UniversalTagNumber.OctetString);
+        public static readonly Asn1Tag ConstructedOctetString = new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.OctetString);
+        public static readonly Asn1Tag Null = new Asn1Tag(0, (int)UniversalTagNumber.Null);
+        public static readonly Asn1Tag ObjectIdentifier = new Asn1Tag(0, (int)UniversalTagNumber.ObjectIdentifier);
+        public static readonly Asn1Tag Enumerated = new Asn1Tag(0, (int)UniversalTagNumber.Enumerated);
+        public static readonly Asn1Tag Sequence = new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.Sequence);
+        public static readonly Asn1Tag SetOf = new Asn1Tag(ConstructedMask, (int)UniversalTagNumber.SetOf);
+        public static readonly Asn1Tag UtcTime = new Asn1Tag(0, (int)UniversalTagNumber.UtcTime);
+        public static readonly Asn1Tag GeneralizedTime = new Asn1Tag(0, (int)UniversalTagNumber.GeneralizedTime);
 
         private readonly byte _controlFlags;
         private readonly int _tagValue;
@@ -345,7 +345,7 @@ namespace System.Security.Cryptography.Asn1
         }
     }
 
-    internal static class AsnCharacterStringEncodings
+    public static class AsnCharacterStringEncodings
     {
         private static readonly Text.Encoding s_utf8Encoding = new UTF8Encoding(false, throwOnInvalidBytes: true);
         private static readonly Text.Encoding s_bmpEncoding = new BMPEncoding();
@@ -354,7 +354,7 @@ namespace System.Security.Cryptography.Asn1
         private static readonly Text.Encoding s_printableStringEncoding = new PrintableStringEncoding();
         private static readonly Text.Encoding s_t61Encoding = new T61Encoding();
 
-        internal static Text.Encoding GetEncoding(UniversalTagNumber encodingType)
+        public static Text.Encoding GetEncoding(UniversalTagNumber encodingType)
         {
             switch (encodingType)
             {
@@ -376,7 +376,7 @@ namespace System.Security.Cryptography.Asn1
         }
     }
 
-    internal abstract class SpanBasedEncoding : Text.Encoding
+    public abstract class SpanBasedEncoding : Text.Encoding
     {
         protected SpanBasedEncoding()
             : base(0, EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback)
@@ -462,7 +462,7 @@ namespace System.Security.Cryptography.Asn1
         }
     }
 
-    internal class IA5Encoding : RestrictedAsciiStringEncoding
+    public class IA5Encoding : RestrictedAsciiStringEncoding
     {
         // T-REC-X.680-201508 sec 41, Table 8.
         // ISO International Register of Coded Character Sets to be used with Escape Sequences 001
@@ -472,34 +472,34 @@ namespace System.Security.Cryptography.Asn1
         // Space is ASCII 0x20, delete is ASCII 0x7F.
         //
         // The net result is all of 7-bit ASCII
-        internal IA5Encoding()
+        public IA5Encoding()
             : base(0x00, 0x7F)
         {
         }
     }
 
-    internal class VisibleStringEncoding : RestrictedAsciiStringEncoding
+    public class VisibleStringEncoding : RestrictedAsciiStringEncoding
     {
         // T-REC-X.680-201508 sec 41, Table 8.
         // ISO International Register of Coded Character Sets to be used with Escape Sequences 006
         //   is ASCII 0x21 - 0x7E
         // Space is ASCII 0x20.
-        internal VisibleStringEncoding()
+        public VisibleStringEncoding()
             : base(0x20, 0x7E)
         {
         }
     }
 
-    internal class PrintableStringEncoding : RestrictedAsciiStringEncoding
+    public class PrintableStringEncoding : RestrictedAsciiStringEncoding
     {
         // T-REC-X.680-201508 sec 41.4
-        internal PrintableStringEncoding()
+        public PrintableStringEncoding()
             : base("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 '()+,-./:=?")
         {
         }
     }
 
-    internal abstract class RestrictedAsciiStringEncoding : SpanBasedEncoding
+    public abstract class RestrictedAsciiStringEncoding : SpanBasedEncoding
     {
         private readonly bool[] _isAllowed;
 
@@ -611,7 +611,7 @@ namespace System.Security.Cryptography.Asn1
     // T-REC-X.690-201508 sec 8.23.8 says to see ISO/IEC 10646:2003 section 13.1.
     // ISO/IEC 10646:2003 sec 13.1 says each character is represented by "two octets".
     // ISO/IEC 10646:2003 sec 6.3 says that when serialized as octets to use big endian.
-    internal class BMPEncoding : SpanBasedEncoding
+    public class BMPEncoding : SpanBasedEncoding
     {
         protected override int GetBytes(ReadOnlySpan<char> chars, Span<byte> bytes, bool write)
         {
@@ -711,7 +711,7 @@ namespace System.Security.Cryptography.Asn1
     /// Compatibility encoding for T61Strings. Interprets the characters as UTF-8 or
     /// ISO-8859-1 as a fallback.
     /// <summary>
-    internal class T61Encoding : Text.Encoding
+    public class T61Encoding : Text.Encoding
     {
         private static readonly Text.Encoding s_utf8Encoding = new UTF8Encoding(false, throwOnInvalidBytes: true);
         private static readonly Text.Encoding s_latin1Encoding = System.Text.Encoding.GetEncoding("iso-8859-1");
@@ -824,9 +824,9 @@ namespace System.Security.Cryptography.Asn1
         }
     }
 
-    internal class SetOfValueComparer : IComparer<ReadOnlyMemory<byte>>
+    public class SetOfValueComparer : IComparer<ReadOnlyMemory<byte>>
     {
-        internal static SetOfValueComparer Instance { get; } = new SetOfValueComparer();
+        public static SetOfValueComparer Instance { get; } = new SetOfValueComparer();
 
         public int Compare(ReadOnlyMemory<byte> x, ReadOnlyMemory<byte> y)
         {

@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Cryptography.Asn1
 {
-    internal sealed class AsnWriter : IDisposable
+    public sealed class AsnWriter : IDisposable
     {
         private byte[] _buffer;
         private int _offset;

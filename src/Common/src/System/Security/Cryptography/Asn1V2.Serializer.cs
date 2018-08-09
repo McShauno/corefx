@@ -50,7 +50,7 @@ namespace System.Security.Cryptography.Asn1
         }
     }
 
-    internal static class AsnSerializer
+    public static class AsnSerializer
     {
         private const BindingFlags FieldFlags =
             BindingFlags.Public |
@@ -1554,7 +1554,7 @@ namespace System.Security.Cryptography.Asn1
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class ExpectedTagAttribute : Attribute
+    public sealed class ExpectedTagAttribute : Attribute
     {
         public TagClass TagClass { get; }
         public int TagValue { get; }
@@ -1572,37 +1572,37 @@ namespace System.Security.Cryptography.Asn1
         }
     }
 
-    internal abstract class AsnTypeAttribute : Attribute
+    public abstract class AsnTypeAttribute : Attribute
     {
-        internal AsnTypeAttribute()
+        public AsnTypeAttribute()
         {
         }
     }
 
-    internal abstract class AsnEncodingRuleAttribute : Attribute
+    public abstract class AsnEncodingRuleAttribute : Attribute
     {
-        internal AsnEncodingRuleAttribute()
+        public AsnEncodingRuleAttribute()
         {
         }
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class OctetStringAttribute : AsnTypeAttribute
+    public sealed class OctetStringAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class BitStringAttribute : AsnTypeAttribute
+    public sealed class BitStringAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class AnyValueAttribute : AsnTypeAttribute
+    public sealed class AnyValueAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class ObjectIdentifierAttribute : AsnTypeAttribute
+    public sealed class ObjectIdentifierAttribute : AsnTypeAttribute
     {
         public ObjectIdentifierAttribute()
         {
@@ -1612,66 +1612,68 @@ namespace System.Security.Cryptography.Asn1
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class BMPStringAttribute : AsnTypeAttribute
+    public sealed class BMPStringAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class IA5StringAttribute : AsnTypeAttribute
+    public sealed class IA5StringAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class UTF8StringAttribute : AsnTypeAttribute
+    public sealed class UTF8StringAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class PrintableStringAttribute : AsnTypeAttribute
+    public sealed class PrintableStringAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class VisibleStringAttribute : AsnTypeAttribute
+    public sealed class VisibleStringAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class SequenceOfAttribute : AsnTypeAttribute
+    public sealed class SequenceOfAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class SetOfAttribute : AsnTypeAttribute
+    public sealed class SetOfAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class IntegerAttribute : AsnTypeAttribute
+    public sealed class IntegerAttribute : AsnTypeAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class UtcTimeAttribute : AsnTypeAttribute
+    public sealed class UtcTimeAttribute : AsnTypeAttribute
     {
         public int TwoDigitYearMax { get; set; }
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class GeneralizedTimeAttribute : AsnTypeAttribute
+    public sealed class GeneralizedTimeAttribute : AsnTypeAttribute
     {
         public bool DisallowFractions { get; set; }
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class OptionalValueAttribute : AsnEncodingRuleAttribute
+    public sealed class OptionalValueAttribute : AsnEncodingRuleAttribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Field)]
-    internal sealed class DefaultValueAttribute : AsnEncodingRuleAttribute
+    public sealed class DefaultValueAttribute : AsnEncodingRuleAttribute
     {
-        internal byte[] EncodedBytes { get; }
+        public byte[] EncodedBytes { get; }
+
+        public DefaultValueAttribute() {}
 
         public DefaultValueAttribute(params byte[] encodedValue)
         {
@@ -1682,7 +1684,7 @@ namespace System.Security.Cryptography.Asn1
     }
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    internal sealed class ChoiceAttribute : Attribute
+    public sealed class ChoiceAttribute : Attribute
     {
         public bool AllowNull { get; set; }
     }

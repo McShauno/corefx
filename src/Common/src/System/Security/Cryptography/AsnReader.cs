@@ -13,7 +13,7 @@ using System.Text;
 
 namespace System.Security.Cryptography.Asn1
 {
-    internal class AsnReader
+    public class AsnReader
     {
         // T-REC-X.690-201508 sec 9.2
         internal const int MaxCERSegmentSize = 1000;
